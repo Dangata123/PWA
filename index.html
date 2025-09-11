@@ -3,152 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap 5 PWA</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- PWA manifest -->
+    <title>PWA Test on GitHub</title>
+    <meta name="theme-color" content="#4caf50">
     <link rel="manifest" href="manifest.json">
     <style>
-        .install-btn-container {
-            transition: all 0.3s ease;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .feature-icon {
-            width: 4rem;
-            height: 4rem;
-            border-radius: 0.75rem;
-            background-color: #0d6efd;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(to right, #4caf50, #2e7d32);
             color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        .status-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+        .status {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            font-size: 2rem;
+            margin-bottom: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        .status-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #e0e0e0;
+            flex-shrink: 0;
+        }
+        .online .status-icon {
+            background-color: #4caf50;
+        }
+        .offline .status-icon {
+            background-color: #f44336;
+        }
+        .button-container {
+            display: flex;
+            gap: 12px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 6px;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        button:disabled {
+            background-color: #a5d6a7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        #clearCache {
+            background-color: #f44336;
+        }
+        #clearCache:hover {
+            background-color: #d32f2f;
+        }
+        #simulateOffline {
+            background-color: #ff9800;
+        }
+        #simulateOffline:hover {
+            background-color: #f57c00;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        @media (min-width: 768px) {
+            .content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #4caf50;
+            color: #2e7d32;
+        }
+        .cached-items {
+            list-style-type: none;
+        }
+        .cached-items li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        .cached-items li::before {
+            content: "•";
+            color: #4caf50;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 10px;
+        }
+        .log-container {
+            max-height: 250px;
+            overflow-y: auto;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 0.9em;
+            border: 1px solid #e0e0e0;
+        }
+        .log-entry {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #ddd;
+            line-height: 1.4;
+        }
+        .timestamp {
+            color: #666;
+            margin-right: 10px;
+            font-size: 0.85em;
+        }
+        .instructions {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 5px solid #4caf50;
+        }
+        .instructions h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        .instructions ol {
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        .github-info {
+            margin-top: 30px;
+            text-align: center;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-    <!-- Install Button (will be hidden when app is installed) -->
-    <div class="install-btn-container py-2 bg-light" id="installContainer">
-        <div class="container d-flex justify-content-between align-items-center">
-            <span class="fw-bold">Install our app for a better experience</span>
-            <button class="btn btn-primary" id="installButton">Install App</button>
+    <header>
+        <h1>PWA Test on GitHub</h1>
+        <p>Test your Progressive Web App on GitHub Pages</p>
+    </header>
+
+    <div class="status-card">
+        <div class="status" id="onlineStatus">
+            <div class="status-icon"></div>
+            <span>Online Status: Checking...</span>
+        </div>
+        <div class="status" id="serviceWorkerStatus">
+            <div class="status-icon"></div>
+            <span>Service Worker: Checking...</span>
+        </div>
+        <div class="button-container">
+            <button id="installBtn">Install PWA</button>
+            <button id="clearCache">Clear Cache</button>
+            <button id="simulateOffline">Simulate Offline</button>
+            <button id="refreshContent">Refresh Content</button>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="container my-5">
-        <div class="text-center mb-5">
-            <h1 class="display-4 fw-bold">My PWA App</h1>
-            <p class="lead">A simple Progressive Web App built with Bootstrap 5</p>
+    <div class="content">
+        <div class="card">
+            <h3>Cached Resources</h3>
+            <ul class="cached-items" id="cachedList">
+                <li>Loading cached items...</li>
+            </ul>
         </div>
-
-        <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <div class="feature-icon mx-auto">
-                            📱
-                        </div>
-                        <h3 class="card-title">Responsive</h3>
-                        <p class="card-text">Works perfectly on all device sizes, from mobile to desktop.</p>
-                    </div>
-                </div>
+        
+        <div class="card">
+            <h3>Event Log</h3>
+            <div class="log-container" id="eventLog">
+                <div class="log-entry"><span class="timestamp">[System]</span>Initializing PWA...</div>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <div class="feature-icon mx-auto">
-                            ⚡
-                        </div>
-                        <h3 class="card-title">Fast</h3>
-                        <p class="card-text">Optimized for performance and quick loading times.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <div class="feature-icon mx-auto">
-                            🔄
-                        </div>
-                        <h3 class="card-title">Offline</h3>
-                        <p class="card-text">Works even without an internet connection after first load.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="alert alert-info text-center">
-            <h4 class="alert-heading">PWA Features</h4>
-            <p>This app demonstrates key Progressive Web App features including installability and offline functionality.</p>
         </div>
     </div>
 
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">© 2023 My PWA App. All rights reserved.</p>
-        </div>
-    </footer>
+    <div class="instructions">
+        <h3>How to Test on GitHub Pages</h3>
+        <ol>
+            <li>Create a new GitHub repository</li>
+            <li>Upload all PWA files (HTML, SW, Manifest, icons)</li>
+            <li>Enable GitHub Pages in repository settings</li>
+            <li>Access your PWA at https://[username].github.io/[repository]</li>
+            <li>Use Chrome DevTools to test offline functionality</li>
+        </ol>
+    </div>
 
-    <!-- Bootstrap 5 JS with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- PWA functionality -->
+    <div class="github-info">
+        <p>GitHub Pages serves content over HTTPS, which is required for PWAs</p>
+    </div>
+
     <script>
-        // Register service worker for offline functionality
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                .then((registration) => {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                })
-                .catch((error) => {
-                    console.log('ServiceWorker registration failed: ', error);
-                });
-            });
-        }
+        // DOM elements
+        const onlineStatus = document.getElementById('onlineStatus');
+        const serviceWorkerStatus = document.getElementById('serviceWorkerStatus');
+        const installBtn = document.getElementById('installBtn');
+        const clearCacheBtn = document.getElementById('clearCache');
+        const simulateOfflineBtn = document.getElementById('simulateOffline');
+        const refreshContentBtn = document.getElementById('refreshContent');
+        const cachedList = document.getElementById('cachedList');
+        const eventLog = document.getElementById('eventLog');
 
-        // Handle PWA installation
-        let deferredPrompt;
-        const installContainer = document.getElementById('installContainer');
-        const installButton = document.getElementById('installButton');
-
-        // Hide install button by default if the app is already installed
-        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-            installContainer.style.display = 'none';
-        }
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent the mini-infobar from appearing on mobile
-            e.preventDefault();
-            // Stash the event so it can be triggered later
-            deferredPrompt = e;
-            // Show the install button
-            installContainer.style.display = 'block';
+        // Event logging
+        function logEvent(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `<span class="timestamp">[${timestamp}]</span> ${message}`;
+            eventLog.prepend(logEntry);
             
-            installButton.addEventListener('click', () => {
-                // Hide the install button
-                installContainer.style.display = 'none';
-                // Show the install prompt
-                deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    } else {
-                        console.log('User dismissed the install prompt');
+            // Keep log from growing too large
+            if (eventLog.children.length > 50) {
+                eventLog.removeChild(eventLog.lastChild);
+            }
+        }
+
+        // Update online status
+        function updateOnlineStatus() {
+            const isOnline = navigator.onLine;
+            onlineStatus.querySelector('span').textContent = `Online Status: ${isOnline ? 'Online' : 'Offline'}`;
+            onlineStatus.className = `status ${isOnline ? 'online' : 'offline'}`;
+            logEvent(`Went ${isOnline ? 'online' : 'offline'}`);
+        }
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(registration => {
+                    serviceWorkerStatus.querySelector('span').textContent = 'Service Worker: Registered';
+                    serviceWorkerStatus.classList.add('online');
+                    logEvent('Service Worker registered successfully');
+
+                    // Check if there's an updated service worker
+                    if (registration.waiting) {
+                        logEvent('New Service Worker waiting to activate');
                     }
-                    deferredPrompt = null;
+
+                    registration.addEventListener('updatefound', () => {
+                        logEvent('New Service Worker update found');
+                    });
+                })
+                .catch(error => {
+                    serviceWorkerStatus.querySelector('span').textContent = 'Service Worker: Registration Failed';
+                    serviceWorkerStatus.classList.add('offline');
+                    logEvent(`Service Worker registration failed: ${error}`);
                 });
-            });
+        } else {
+            serviceWorkerStatus.querySelector('span').textContent = 'Service Worker: Not Supported';
+            serviceWorkerStatus.classList.add('offline');
+            logEvent('Service Workers are not supported in this browser');
+        }
+
+        // Install button handler
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+            logEvent('PWA installation available');
         });
 
-        window.addEventListener('appinstalled', () => {
-            // Hide the install button after app is installed
-            installContainer.style.display = 'none';
-            // Log the installation
-            console.log('PWA was installed');
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            logEvent(`PWA installation ${outcome}`);
+            
             deferredPrompt = null;
+            installBtn.style.display = 'none';
+        });
+
+        // Clear cache button handler
+        clearCacheBtn.addEventListener('click', () => {
+            if ('caches' in window) {
+                caches.keys().then(cacheNames => {
+                    cacheNames.forEach(cacheName => {
+                        caches.delete(cacheName);
+                    });
+                    logEvent('Cache cleared');
+                    updateCachedResourcesList();
+                });
+            }
+        });
+
+        // Simulate offline button handler
+        simulateOfflineBtn.addEventListener('click', () => {
+            logEvent('Simulating offline mode - use browser dev tools for real offline testing');
+            alert('To actually test offline mode:\n1. Open Chrome DevTools (F12)\n2. Go to the Network tab\n3. Check the "Offline" checkbox');
+        });
+
+        // Refresh content button handler
+        refreshContentBtn.addEventListener('click', () => {
+            logEvent('Refreshing cached content');
+            updateCachedResourcesList();
+        });
+
+        // Update cached resources list
+        function updateCachedResourcesList() {
+            if (!('caches' in window)) {
+                cachedList.innerHTML = '<li>Caches API not supported</li>';
+                return;
+            }
+
+            caches.open('pwa-cache-v1').then(cache => {
+                cache.keys().then(requests => {
+                    if (requests.length === 0) {
+                        cachedList.innerHTML = '<li>No cached resources</li>';
+                        return;
+                    }
+
+                    cachedList.innerHTML = '';
+                    requests.forEach(request => {
+                        const listItem = document.createElement('li');
+                        const url = new URL(request.url);
+                        listItem.textContent = url.pathname.split('/').pop() || url.hostname;
+                        cachedList.appendChild(listItem);
+                    });
+                });
+            }).catch(() => {
+                cachedList.innerHTML = '<li>Error accessing cache</li>';
+            });
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            updateOnlineStatus();
+            updateCachedResourcesList();
+            
+            // Add event listeners
+            window.addEventListener('online', updateOnlineStatus);
+            window.addEventListener('offline', updateOnlineStatus);
+            
+            logEvent('PWA initialized successfully');
+            logEvent('Ready for GitHub Pages deployment');
         });
     </script>
 </body>
