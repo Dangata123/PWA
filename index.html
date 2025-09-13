@@ -5,271 +5,221 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple PWA</title>
     <meta name="theme-color" content="#4caf50">
-    <meta name="description" content="A simple Progressive Web App example">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
+            text-align: center;
         }
         
         header {
-            text-align: center;
-            padding: 20px;
-            background-color: #4caf50;
-            color: white;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+            width: 100%;
         }
         
         h1 {
+            color: #333;
             margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
         }
         
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px 0;
         }
         
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #4caf50, #8bc34a);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 50px;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        #installButton {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        #installButton:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        #installButton:active {
+            transform: translateY(0);
+        }
+        
+        .hidden {
+            display: none !important;
         }
         
         .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            text-align: left;
             margin: 20px 0;
+            padding: 0 20px;
         }
         
-        .feature {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        button {
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin: 5px;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #388e3c;
-        }
-        
-        .buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #666;
+        .feature-list li {
+            margin-bottom: 15px;
+            color: #555;
         }
         
         .status {
-            text-align: center;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-        }
-        
-        .online {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
             background-color: #e8f5e9;
             color: #2e7d32;
+            font-weight: 500;
         }
         
-        .offline {
-            background-color: #ffebee;
-            color: #c62828;
-        }
-        
-        @media (max-width: 600px) {
-            .feature-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            button {
-                width: 80%;
-                margin: 5px 0;
-            }
+        footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Simple PWA Demo</h1>
+        <p>A Progressive Web App that can be installed on your device</p>
+    </header>
+    
     <div class="container">
-        <header>
-            <h1>Simple PWA</h1>
-            <p>Progressive Web App Example</p>
-        </header>
+        <div class="app-icon">✓</div>
+        <h2>Welcome to Simple PWA</h2>
+        <p>This is a demonstration of a Progressive Web App with install functionality.</p>
         
-        <div class="card">
-            <h2>What is a PWA?</h2>
-            <p>A Progressive Web App (PWA) is a web application that uses modern web capabilities to deliver an app-like experience to users.</p>
-            
-            <div class="feature-list">
-                <div class="feature">
-                    <div class="feature-icon">📱</div>
-                    <h3>Installable</h3>
-                    <p>Can be installed on your device</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Fast</h3>
-                    <p>Quick loading and smooth performance</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📶</div>
-                    <h3>Offline</h3>
-                    <p>Works without internet connection</p>
-                </div>
-            </div>
+        <button id="installButton" class="hidden">Install App</button>
+        
+        <div id="statusMessage" class="status hidden">
+            App is installed and ready to use!
         </div>
         
-        <div class="card">
-            <h2>Try It Out</h2>
-            <div id="status" class="status online">Online - You're connected to the internet</div>
-            
-            <div class="buttons">
-                <button id="installBtn">Install App</button>
-                <button id="notifyBtn">Send Notification</button>
-                <button id="clearBtn">Clear Data</button>
-            </div>
-            
-            <p>Click the buttons above to test PWA functionality. Try turning off your internet connection to see offline capabilities.</p>
-        </div>
-        
-        <footer>
-            <p>Simple PWA Example &copy; 2023</p>
-        </footer>
+        <ul class="feature-list">
+            <li>✓ Works offline with service worker</li>
+            <li>✓ Fast and responsive</li>
+            <li>✓ Installable on devices</li>
+            <li>✓ Cross-platform compatibility</li>
+        </ul>
     </div>
+    
+    <footer>
+        <p>Simple PWA &copy; 2023 | All rights reserved</p>
+    </footer>
 
     <script>
-        // Register Service Worker
+        // Register service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
-                .then(registration => {
-                    console.log('SW registered: ', registration);
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
                 })
-                .catch(registrationError => {
-                    console.log('SW registration failed: ', registrationError);
+                .catch((error) => {
+                    console.log('Service Worker registration failed:', error);
                 });
             });
         }
 
-        // Online/Offline Status
-        function updateOnlineStatus() {
-            const statusElement = document.getElementById('status');
-            if (navigator.onLine) {
-                statusElement.textContent = 'Online - You\'re connected to the internet';
-                statusElement.className = 'status online';
-            } else {
-                statusElement.textContent = 'Offline - Using cached content';
-                statusElement.className = 'status offline';
+        // Install app functionality
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+        const statusMessage = document.getElementById('statusMessage');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Show the install button
+            installButton.classList.remove('hidden');
+            
+            // Check if the app is already installed
+            if (window.matchMedia('(display-mode: standalone)').matches || 
+                window.navigator.standalone === true) {
+                hideInstallButton();
             }
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            // Show the install prompt
+            deferredPrompt.prompt();
+            
+            // Wait for the user to respond to the prompt
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+                hideInstallButton();
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+            
+            // Clear the saved prompt since it can't be used again
+            deferredPrompt = null;
+        });
+
+        window.addEventListener('appinstalled', () => {
+            // Hide the install button
+            hideInstallButton();
+            // Clear the deferredPrompt
+            deferredPrompt = null;
+            console.log('PWA was installed');
+        });
+
+        function hideInstallButton() {
+            installButton.classList.add('hidden');
+            statusMessage.classList.remove('hidden');
         }
 
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-        updateOnlineStatus();
-
-        // Install Button
-        let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBtn.style.display = 'block';
-        });
-
-        installBtn.addEventListener('click', () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(choiceResult => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    } else {
-                        console.log('User dismissed the install prompt');
-                    }
-                    deferredPrompt = null;
-                });
-            }
-        });
-
-        // Notification Button
-        const notifyBtn = document.getElementById('notifyBtn');
-        
-        notifyBtn.addEventListener('click', () => {
-            if ('Notification' in window && Notification.permission === 'granted') {
-                new Notification('Hello from PWA!', {
-                    body: 'This is a notification from our simple PWA.',
-                    icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>'
-                });
-            } else if ('Notification' in window && Notification.permission !== 'denied') {
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                        new Notification('Hello from PWA!', {
-                            body: 'This is a notification from our simple PWA.',
-                            icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>'
-                        });
-                    }
-                });
-            }
-        });
-
-        // Clear Data Button
-        const clearBtn = document.getElementById('clearBtn');
-        
-        clearBtn.addEventListener('click', () => {
-            if ('caches' in window) {
-                caches.keys().then(cacheNames => {
-                    cacheNames.forEach(cacheName => {
-                        caches.delete(cacheName);
-                    });
-                    alert('Cache cleared! Reload the page to see the effect.');
-                });
-            }
-        });
+        // Check if running in standalone mode (already installed)
+        if (window.matchMedia('(display-mode: standalone)').matches || 
+            window.navigator.standalone === true) {
+            hideInstallButton();
+        }
     </script>
 </body>
 </html>
