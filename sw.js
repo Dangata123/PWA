@@ -1,17 +1,18 @@
-const CACHE_NAME = 'pwa-cache-v1';
+const CACHE_NAME = 'simple-pwa-v1';
 const urlsToCache = [
   '/',
   '/index.html',
   '/styles.css',
-  '/app.js',
-  '/manifest.json'
+  '/app.js'
 ];
 
 // Install event
 self.addEventListener('install', event => {
+  console.log('Service Worker installing.');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
+        console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
   );
@@ -25,20 +26,5 @@ self.addEventListener('fetch', event => {
         // Return cached version or fetch from network
         return response || fetch(event.request);
       })
-  );
-});
-
-// Activate event
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
   );
 });
