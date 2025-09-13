@@ -1,21 +1,24 @@
 {
   "name": "Simple PWA",
-  "short_name": "PWA Demo",
-  "description": "A simple Progressive Web App example",
+  "short_name": "SimplePWA",
+  "description": "A simple Progressive Web App demonstration",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f7fa",
   "theme_color": "#4caf50",
+  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>",
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMzAiIGZpbGw9IiM0Y2FmNTAiLz4KPHBhdGggZD0iTTg0IDEzMkM4NCAxMjMuMiA5MS4yIDExNiAxMDAgMTE2SDkyQzEwMC44IDExNiAxMDggMTIzLjIgMTA4IDEzMkMxMDggMTQwLjggMTAwLjggMTQ4IDkyIDE0OEgxMDBDMTAwLjggMTQ4IDEwOCAxNDAuOCAxMDggMTMyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEzNiAxMDRDMTM2IDk1LjIgMTQzLjIgODggMTUyIDg4SDE0NEMxNTIuOCA4OCAxNjAgOTUuMiAxNjAgMTA0QzE2MCAxMTIuOCAxNTIuOCAxMjAgMTQ0IDEyMEgxNTJDMTUyLjggMTIwIDE2MCAxMTIuOCAxNjAgMTA0WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTMyIDY0QzMyIDU1LjIgMzkuMiA0OCA0OCA0OEg0MEM0OC44IDQ4IDU2IDU1LjIgNTYgNjRDNjQgNjQgNzIgNzIgNzIgODBDNzIgODguOCA2NC44IDk2IDU2IDk2QzQ3LjIgOTYgNDAgODguOCA0MCA4MEMoNDAgODAgNDAgNjQgMzIgNjRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
       "sizes": "192x192",
       "type": "image/svg+xml"
     },
     {
-      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>",
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iNzAiIGZpbGw9IiM0Y2FmNTAiLz4KPHBhdGggZD0iTTIyNCAyODhDMjI0IDI2MC4yIDI1Mi44IDIzMiAyODAgMjMySDI1NkMyODMuMiAyMzIgMzEyIDI2MC4yIDMxMiAyODhDMzEyIDMxNS44IDI4My4yIDM0NCAyNTYgMzQ0SDI4MEMyODMuMiAzNDQgMzEyIDMxNS44IDMxMiAyODhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMzY4IDI0MEMzNjggMjEyLjIgNDA1LjIgMTc2IDQzMiAxNzZINDA4QzQzNS4yIDE3NiA0NzIgMjEyLjIgNDcyIDI0MEM0NzIgMjY3LjggNDM1LjIgMzA0IDQwOCAzMDRINDMyQzQzNS4yIDMwNCA0NzIgMjY3LjggNDcyIDI0MFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04NCAxNjBDODQgMTMyLjIgMTIxLjIgOTYgMTQ4IDk2SDEyNEMxNTEuMiA5NiAxODggMTMyLjIgMTg4IDE2MEMxODggMTg3LjggMTUxLjIgMjI0IDEyNCAyMjRDOTYuOCAyMjQgNjAgMTg3LjggNjAgMTYwQzYwIDEzMi4yIDk2LjggOTYgMTI0IDk2QzEyMS4yIDk2IDg0IDEzMi4yIDg0IDE2MFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=",
       "sizes": "512x512",
       "type": "image/svg+xml"
     }
-  ]
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "en-US"
 }
