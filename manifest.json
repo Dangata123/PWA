@@ -1,21 +1,21 @@
 {
-  "name": "PWA Test on GitHub",
-  "short_name": "PWA GitHub",
-  "description": "A demo PWA for testing on GitHub Pages",
+  "name": "Simple PWA",
+  "short_name": "PWA Demo",
+  "description": "A simple Progressive Web App example",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8f9fa",
+  "background_color": "#f5f7fa",
   "theme_color": "#4caf50",
   "icons": [
     {
-      "src": "https://via.placeholder.com/192x192/4caf50/ffffff?text=PWA",
+      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/svg+xml"
     },
     {
-      "src": "https://via.placeholder.com/512x512/4caf50/ffffff?text=PWA",
+      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg+xml"
     }
   ]
 }
