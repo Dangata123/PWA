@@ -4,120 +4,203 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PWA Install Demo</title>
-    <meta name="theme-color" content="#4CAF50">
+    <meta name="theme-color" content="#4a90e2">
+    <link rel="manifest" href="manifest.json">
     <style>
         * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 500px;
-    width: 90%;
-}
-
-h1 {
-    color: #333;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-}
-
-p {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-
-.install-container {
-    margin: 2rem 0;
-    transition: all 0.3s ease;
-}
-
-.install-btn {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    font-size: 1.1rem;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-}
-
-.install-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-}
-
-.install-btn:active {
-    transform: translateY(0);
-}
-
-.content {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #eee;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.visible {
-    display: block;
-}
-
-/* Success message */
-.success-message {
-    color: #4CAF50;
-    font-weight: bold;
-    margin: 1rem 0;
-    padding: 10px;
-    background: #f8fff8;
-    border: 1px solid #4CAF50;
-    border-radius: 5px;
-}
-
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .button {
+            background-color: white;
+            color: #4a90e2;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .button:active {
+            transform: translateY(1px);
+        }
+        
+        .button.hidden {
+            display: none;
+        }
+        
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px;
+            width: 150px;
+        }
+        
+        .feature i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
     </style>
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="container">
-        <h1>My PWA App</h1>
-        <p>Welcome to this Progressive Web App!</p>
+        <h1>PWA Install Demo</h1>
+        <p>This is a Progressive Web App that can be installed on your device. Try the install button below!</p>
         
-        <div id="installContainer" class="install-container hidden">
-            <button id="installButton" class="install-btn">
-                Install App
-            </button>
+        <div class="feature-list">
+            <div class="feature">
+                <i>📱</i>
+                <div>Installable</div>
+            </div>
+            <div class="feature">
+                <i>⚡</i>
+                <div>Fast</div>
+            </div>
+            <div class="feature">
+                <i>🔒</i>
+                <div>Secure</div>
+            </div>
+            <div class="feature">
+                <i>🌐</i>
+                <div>Offline</div>
+            </div>
         </div>
         
-        <div class="content">
-            <p>This app demonstrates PWA installation behavior.</p>
-            <p>Try installing the app to see the button disappear!</p>
+        <button id="installButton" class="button">Install App</button>
+        
+        <div id="status" class="status">
+            App installation status will appear here.
         </div>
     </div>
+    
+    <footer>
+        PWA Demo - Works with GitHub Pages
+    </footer>
 
-    <script src="app.js"></script>
+    <script>
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // PWA installation handling
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+        const statusDiv = document.getElementById('status');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Update UI to notify the user they can install the PWA
+            installButton.classList.remove('hidden');
+            statusDiv.textContent = 'App can be installed. Click the install button.';
+            
+            installButton.addEventListener('click', () => {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        statusDiv.textContent = 'App installed successfully!';
+                        installButton.classList.add('hidden');
+                    } else {
+                        statusDiv.textContent = 'App installation cancelled.';
+                    }
+                    deferredPrompt = null;
+                });
+            });
+        });
+
+        window.addEventListener('appinstalled', () => {
+            // Hide the install button after app is installed
+            installButton.classList.add('hidden');
+            statusDiv.textContent = 'App has been successfully installed!';
+            deferredPrompt = null;
+        });
+
+        // Check if the app is already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            installButton.classList.add('hidden');
+            statusDiv.textContent = 'App is already installed and running in standalone mode.';
+        }
+    </script>
 </body>
 </html>
-
-
-
-
